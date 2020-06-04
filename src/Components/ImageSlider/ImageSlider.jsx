@@ -1,60 +1,64 @@
 import React, { Component, Fragment } from 'react'
 import "./ImageSlider.scss";
 import ImageView from '../ImageView/ImageView'
+import ImageModal from '../ImageModal/ImageModal';
 
 class ImageSlider extends Component {
 
     constructor(props) {
         super(props)
-
-        this.slideIndex = 1
+        this.state = {
+            viewModal: false,
+            activeIndex: 0
+        }
     }
 
-    plusSlides = (n) => {
-        this.showSlides(this.slideIndex += n);
-    }
-
-    currentSlide = (n) => {
-        this.showSlides(this.slideIndex = n);
+    nextSlide = (n) => {
+        this.showSlides(this.state.activeIndex + n);
     }
 
     showSlides = (n) => {
-        var i;
-        var slides = document.getElementsByClassName("my-slides");
-        var dots = document.getElementsByClassName("dot");
-        if (n > slides.length) { this.slideIndex = 1 }
-        if (n < 1) { this.slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        if (slides.length) slides[this.slideIndex - 1].style.display = "block";
-        if (dots.length) dots[this.slideIndex - 1].className += " active";
+        const { images } = this.props
+        let activeIndex = n;
+        if (n >= images.length) { activeIndex = 0 }
+        if (n < 0) { activeIndex = images.length - 1 }
+        this.setState({ activeIndex })
     }
 
     componentDidMount() {
-        this.showSlides(this.slideIndex);
+        this.showSlides(this.state.activeIndex);
     }
 
-
     render() {
+        const { viewModal, activeIndex } = this.state
         const { images } = this.props
         return (
             <Fragment>
+
+                {
+                    viewModal &&
+                    <ImageModal
+                        source={images[activeIndex]}
+                        onClose={() => { this.setState({ viewModal: false }) }}
+                        nextSlide={this.nextSlide}
+                    >
+                    </ImageModal>
+                }
+
                 <div className="slideshow-container">
                     {
-                        Array.isArray(images) && images.map((img) =>
-                            <div className="my-slides fade" key={img.id}>
-                                <ImageView source={img} />
+                        Array.isArray(images) && images.map((img, index) =>
+                            <div className="my-slides fade"
+                                style={activeIndex === index ? { display: "block" } : { display: "none" }}
+                                key={img.id}>
+                                <ImageView source={img} openModal={() => { this.setState({ viewModal: true }) }} />
                             </div>
                         )
                     }
 
                     <div className="arrow-container">
-                        <a className="prev" onClick={() => this.plusSlides(-1)}>&#10094;</a>
-                        <a className="next" onClick={() => this.plusSlides(1)}>&#10095;</a>
+                        <div className="prev" onClick={() => this.nextSlide(-1)}>&#10094;</div>
+                        <div className="next" onClick={() => this.nextSlide(+1)}>&#10095;</div>
                     </div>
                 </div>
                 <br />
@@ -62,10 +66,11 @@ class ImageSlider extends Component {
                 <div className="dot-container">
                     {
                         Array.isArray(images) && images.map((img, index) =>
-                            <span key={img.id} className="dot" onClick={() => this.currentSlide(index + 1)}></span>
+                            <span key={img.id} className={`${activeIndex === index ? "active" : ""} dot`} onClick={() => this.showSlides(index)}></span>
                         )
                     }
                 </div>
+
             </Fragment>
         )
     }
