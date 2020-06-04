@@ -11,8 +11,9 @@ class ImageView extends Component {
     render() {
 
         const { source } = this.props
-        if (!source) return null
         const { url, caption, id } = source || {}
+        
+        if(!url) return null
         const { viewModal } = this.state
         return (
             <>
