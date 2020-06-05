@@ -8,9 +8,10 @@
     left: 0;
     top: 0;
     width: 100%; /* Full width */
-    height: -moz-available;          /* WebKit-based browsers will ignore this. */
-    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-    height: fill-available;
+    // height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    // height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    // height: fill-available;
+    height: stretch;
     background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
 }
@@ -21,9 +22,10 @@
     margin: auto;
     max-width: 100%;
     height: auto !important;
-    max-height: -webkit-fill-available;
-    max-height: -moz-available;          /* WebKit-based browsers will ignore this. */
-    max-height: fill-available;
+    // max-height: -webkit-fill-available;
+    // max-height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    // max-height: fill-available;
+    max-height: stretch;
 
 }
 
