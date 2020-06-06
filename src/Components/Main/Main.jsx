@@ -21,21 +21,21 @@ class Main extends Component {
                 id: "3",
                 caption: "Caption",
             },
-            {
-                url: "dp.png",
-                id: "4",
-                caption: "Caption",
-            },
-            {
-                url: "2.png",
-                id: "5",
-                caption: "Caption",
-            },
-            {
-                url: "3.png",
-                id: "6",
-                caption: "Caption",
-            }
+            // {
+            //     url: "dp.png",
+            //     id: "4",
+            //     caption: "Caption",
+            // },
+            // {
+            //     url: "2.png",
+            //     id: "5",
+            //     caption: "Caption",
+            // },
+            // {
+            //     url: "3.png",
+            //     id: "6",
+            //     caption: "Caption",
+            // }
         ]
     }
 
