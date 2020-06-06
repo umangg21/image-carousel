@@ -6,14 +6,13 @@ class ImageUploader extends Component {
     state = {
 
     }
-
     onUploadImage = () => {
         const { imageUrl } = this.state
         this.props.addToImages(imageUrl)
         this.setState({
             openModal: false,
             imageUrl: ""
-        })
+        }, this.clearImage)
     }
 
     manageUploadedFile = (file) => {

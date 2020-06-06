@@ -11,6 +11,7 @@ class ImageSlider extends Component {
             viewModal: false,
             activeIndex: 0
         }
+        this.props.bindChangeIndex(this.showSlides)
     }
 
     nextSlide = (n) => {

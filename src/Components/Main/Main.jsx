@@ -21,22 +21,16 @@ class Main extends Component {
                 id: "3",
                 caption: "Caption",
             },
-            // {
-            //     url: "dp.png",
-            //     id: "4",
-            //     caption: "Caption",
-            // },
-            // {
-            //     url: "2.png",
-            //     id: "5",
-            //     caption: "Caption",
-            // },
-            // {
-            //     url: "3.png",
-            //     id: "6",
-            //     caption: "Caption",
-            // }
         ]
+    }
+
+    bindChangeIndex = (func) => {
+        this.chaneIndex = func
+    }
+
+    changeIndex = () => {
+        const { images } = this.state
+        this.chaneIndex(images.length - 1)
     }
 
     addImage = (newImage, caption) => {
@@ -52,7 +46,7 @@ class Main extends Component {
 
         this.setState({
             images: [...images, newImageObject]
-        })
+        }, this.changeIndex)
     }
 
     render() {
@@ -62,7 +56,7 @@ class Main extends Component {
                     <p className="header-title">Image Carousel</p>
                 </div>
                 <div className="container">
-                    <ImageSlider images={this.state.images} />
+                    <ImageSlider images={this.state.images} bindChangeIndex={this.bindChangeIndex} />
                     <ImageUploader addToImages={this.addImage} />
                 </div>
             </>
