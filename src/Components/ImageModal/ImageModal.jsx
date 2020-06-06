@@ -23,19 +23,26 @@ class ImageModal extends Component {
     }
 
     render() {
-        const { source, children } = this.props
-        const { url, caption } = source || {}
+        const { source, children, hideNavigation } = this.props
+        const { url, caption, customImage } = source || {}
         return (
             <div id="img-modal" className="modal">
                 <span className="modal-close">&times;</span>
-                <img className="modal-content" id="img01" src={`${process.env.PUBLIC_URL}/assets/images/${url}`} alt="" />
+                <img loading="lazy" className="modal-content" id="img01" src={customImage ? url : `${process.env.PUBLIC_URL}/assets/images/${url}`} alt="" />
                 {children}
-                <div className="modal-caption">{caption}</div>
+                
+                {
+                    !!caption &&  <div className="modal-caption">{caption}</div>
+                }
+               
+                {
+                    !hideNavigation &&
+                    <div className="arrow-container">
+                        <div className="prev" onClick={() => this.nextSlide(-1)}>&#10094;</div>
+                        <div className="next" onClick={() => this.nextSlide(1)}>&#10095;</div>
+                    </div>
+                }
 
-                <div className="arrow-container">
-                    <div className="prev" onClick={() => this.nextSlide(-1)}>&#10094;</div>
-                    <div className="next" onClick={() => this.nextSlide(1)}>&#10095;</div>
-                </div>
             </div>
         )
     }

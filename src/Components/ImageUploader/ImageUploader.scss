@@ -1,0 +1,56 @@
+.uploader-container {
+    max-width: 1000px;
+    // position: relative;
+    margin: auto;
+}
+
+.uploader-heading {
+    font-size: 26px;
+    font-weight: 600;
+    color: #707070;
+}
+
+.uploader {
+    height: 100%;
+    width: fit-content;
+    border-radius: 5px;
+    background-color: #e6effb;
+    text-align: center;
+    padding: 10px;
+
+    .border {
+        height: 100%;
+        border-radius: 5px;
+        border: 2px dashed #979797;
+        display: inline-block;
+        text-align: center;
+        margin: auto;
+        cursor: pointer;
+
+        .text-section {
+            display: inline-block;
+            text-align: center;
+            padding: 10px;
+            color: #707070;
+        }
+    }
+}
+
+.upload-button {
+    &-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    background: #ccc;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #343a40;
+    border: 2px solid;
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+    outline: none;
+}
